@@ -1,0 +1,194 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Harshit Dubey — Portfolio Design System
+   Dark cinematic theme with iridescent gradients, glassmorphism, premium typography.
+   All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    --background: 240 25% 3%;
+    --foreground: 240 10% 96%;
+
+    --card: 240 16% 8%;
+    --card-foreground: 240 10% 96%;
+
+    --popover: 240 16% 8%;
+    --popover-foreground: 240 10% 96%;
+
+    --primary: 264 90% 70%;
+    --primary-foreground: 240 18% 5%;
+    --primary-glow: 280 100% 75%;
+
+    --secondary: 200 100% 65%;
+    --secondary-foreground: 240 18% 5%;
+
+    --accent: 320 95% 70%;
+    --accent-foreground: 240 18% 5%;
+
+    --muted: 240 12% 14%;
+    --muted-foreground: 240 8% 65%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 240 10% 96%;
+
+    --border: 240 14% 18%;
+    --input: 240 14% 18%;
+    --ring: 264 90% 70%;
+
+    --radius: 1rem;
+
+    /* Glass surfaces */
+    --glass-bg: 240 16% 10% / 0.5;
+    --glass-border: 240 20% 80% / 0.12;
+    --glass-highlight: 0 0% 100% / 0.06;
+
+    /* Brand gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(264 90% 70%), hsl(320 95% 70%), hsl(200 100% 65%));
+    --gradient-aurora: linear-gradient(135deg, hsl(264 90% 70% / 0.9), hsl(200 100% 65% / 0.9), hsl(160 84% 60% / 0.7));
+    --gradient-radial: radial-gradient(circle at 30% 20%, hsl(264 90% 70% / 0.35), transparent 60%),
+                       radial-gradient(circle at 80% 80%, hsl(320 95% 70% / 0.3), transparent 55%),
+                       radial-gradient(circle at 50% 100%, hsl(200 100% 65% / 0.25), transparent 60%);
+    --gradient-text: linear-gradient(120deg, hsl(0 0% 100%) 0%, hsl(264 90% 80%) 35%, hsl(320 95% 75%) 65%, hsl(200 100% 75%) 100%);
+
+    /* Shadows & glows */
+    --shadow-glow: 0 0 60px hsl(264 90% 70% / 0.35);
+    --shadow-elegant: 0 20px 60px -20px hsl(264 90% 30% / 0.5);
+    --shadow-card: 0 8px 32px hsl(240 30% 2% / 0.6);
+
+    --transition-smooth: cubic-bezier(0.65, 0, 0.35, 1);
+    --transition-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+    --sidebar-background: 240 18% 5%;
+    --sidebar-foreground: 240 10% 96%;
+    --sidebar-primary: 264 90% 70%;
+    --sidebar-primary-foreground: 240 18% 5%;
+    --sidebar-accent: 240 12% 14%;
+    --sidebar-accent-foreground: 240 10% 96%;
+    --sidebar-border: 240 14% 18%;
+    --sidebar-ring: 264 90% 70%;
+  }
+
+  .dark {
+    --background: 240 18% 5%;
+    --foreground: 240 10% 96%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Inter', system-ui, sans-serif;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Space Grotesk', sans-serif;
+    letter-spacing: -0.02em;
+  }
+
+  .font-serif-display {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    letter-spacing: -0.01em;
+  }
+
+  ::selection {
+    background: hsl(var(--primary) / 0.4);
+    color: hsl(var(--foreground));
+  }
+
+  /* Hide UnicornStudio "Made with" watermark */
+  [data-us-project] a[href*="unicorn.studio"],
+  [data-us-project] a[href*="unicornstudio"],
+  [data-us-project] > a,
+  [data-us-project] > div > a:last-child,
+  [data-us-project] [class*="badge" i],
+  [data-us-project] [class*="watermark" i],
+  [data-us-project] [class*="branding" i],
+  [data-us-project] [class*="made" i] {
+    display: none !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    visibility: hidden !important;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar { width: 8px; }
+  ::-webkit-scrollbar-track { background: hsl(var(--background)); }
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(hsl(var(--primary)), hsl(var(--accent)));
+    border-radius: 4px;
+  }
+}
+
+@layer components {
+  .glass {
+    background: hsl(var(--glass-bg));
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    border: 1px solid hsl(var(--glass-border));
+    box-shadow: var(--shadow-card), inset 0 1px 0 hsl(var(--glass-highlight));
+  }
+
+  .glass-strong {
+    background: hsl(240 16% 10% / 0.7);
+    backdrop-filter: blur(32px) saturate(200%);
+    -webkit-backdrop-filter: blur(32px) saturate(200%);
+    border: 1px solid hsl(var(--glass-border));
+  }
+
+  .gradient-text {
+    background: var(--gradient-text);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    background-size: 200% 200%;
+    animation: gradient-shift 8s ease infinite;
+  }
+
+  .gradient-border {
+    position: relative;
+  }
+  .gradient-border::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    padding: 1px;
+    border-radius: inherit;
+    background: var(--gradient-primary);
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+            mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  .glow-primary {
+    box-shadow: var(--shadow-glow);
+  }
+
+  .noise::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.04;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  }
+}
+
+@layer utilities {
+  .text-balance { text-wrap: balance; }
+  .text-pretty { text-wrap: pretty; }
+}
